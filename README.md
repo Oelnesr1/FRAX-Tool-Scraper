@@ -1,6 +1,6 @@
 # FRAX — Fracture Risk Assessment Tool Web Scraper
 
-This directory is a Selenium-based web scraper for the FRAX Fracture Risk Assessment Web Tool. 
+This repository is a Selenium-based web scraper for the FRAX Fracture Risk Assessment Web Tool. 
 
 To run, ensure that the correct Chrome driver for your operating system is installed into this directory. Then, to run the web scraper, simply execute:
 
