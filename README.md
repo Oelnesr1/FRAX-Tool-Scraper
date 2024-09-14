@@ -2,7 +2,7 @@
 
 This directory is a Selenium-based web scraper for the FRAX Fracture Risk Assessment Web Tool. 
 
-To run, ensure that the correct Chrome drive for your operating system is installed into this directory. Then, to run the web scraper, simply execute:
+To run, ensure that the correct Chrome driver for your operating system is installed into this directory. Then, to run the web scraper, simply execute:
 
 ```
 	python3 ./frax_selenium_scrape.py -infile [INFILE] -ofile [OFILE]
