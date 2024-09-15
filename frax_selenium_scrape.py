@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
+import platform
 import os
 import time
 import argparse 
@@ -13,42 +14,46 @@ import argparse
 parser = argparse.ArgumentParser(prog = "FRAX Selenium Scraper",
                                  description = "This program is a Selenium-based web scraper to use the FRAX Fracture Risk Assessment Tool Webpage"
                                  )
-parser.add_argument('-infile', required=False, help = "An input file. If not defined, the input file will be 'data.csv'", nargs = "?", default = "frax_data.csv")
+parser.add_argument('-infile', required=False, help = "An input file. If not defined, the input file will be 'frax_data.csv'", nargs = "?", default = "frax_data.csv")
 parser.add_argument('-ofile', required=False, help = "An output file. If not defined, the output file will be 'frax_results.csv'", nargs = "?", default = "frax_results.csv")
 
 args = parser.parse_args()
 
+# Check the platform system and use the right name for the Chrome driver for cross-platform compatibility
+
+if (platform.system() == 'Darwin' or platform.system() == 'Linux'):
+    chromedriver_name = 'chromedriver'
+elif (platform.system() == 'Windows'):
+    chromedriver_name = 'chromedriver.exe'
+else:
+    raise Exception('This may not be supported in your operating system.')
 
 # Initialize selenium
 
-service = Service(os.path.join(os.getcwd(), 'chromedriver'))
+service = Service(os.path.join(os.getcwd(), chromedriver_name))
 options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=service, options=options)
-# driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx')
 
 # Initialize pandas
 
 df = pd.read_csv(args.infile)
 results_df = pd.DataFrame(columns = ['age', 'weight', 'height', 'sex', 'major osteoporotic risk', 'hip fracture risk'])
 
-
 for index, row in df.iterrows():
 
+    # Reloading the webpage is more consistent than clearing form data
     driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx')
 
+    # Must pause for 3 seconds or we will receive an error from the webpage's API of accessing the calculator too fast
     time.sleep(3)
 
     # Add age, weight, and height into the webform
     age_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$toolage")
-    age_input.clear()
-    age_input.send_keys(row['age'])
-
     weight_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$toolweight")
-    weight_input.clear()
-    weight_input.send_keys(row['weight'])
-    
     height_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$ht")
-    height_input.clear()
+
+    age_input.send_keys(row['age'])
+    weight_input.send_keys(row['weight'])
     height_input.send_keys(row['height'])
 
     # Click the corresponding button for sex
@@ -70,23 +75,14 @@ for index, row in df.iterrows():
 
     # Add results to a new dataframe
 
-    results_df = results_df.append({
-        'age': row['age'],
-        'weight': row['weight'],
-        'height': row['height'],
-        'sex': row['sex'],
-        'major osteoporotic risk': major_osteoporotic_risk.text,
-        'hip fracture risk': hip_fracture_risk.text
-    }, ignore_index=True)
+    results_df = pd.concat([results_df, 
+        pd.DataFrame([[row['age'],row['weight'],row['height'],row['sex'],major_osteoporotic_risk.text, hip_fracture_risk.text]], 
+                     columns=results_df.columns)], 
+                     ignore_index=True)
 
-
+    # Print results to console to make sure the program is running properly
     print(major_osteoporotic_risk.text, hip_fracture_risk.text)
 
 # Print the results to the output file
 
 results_df.to_csv(args.ofile, index=False)
-
-
-
-
-
