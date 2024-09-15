@@ -3,7 +3,11 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.alert import Alert
 import pandas as pd
+import numpy as np
 import platform
 import os
 import time
@@ -37,7 +41,7 @@ driver = webdriver.Chrome(service=service, options=options)
 # Initialize pandas
 
 df = pd.read_csv(args.infile)
-results_df = pd.DataFrame(columns = ['age', 'weight', 'height', 'sex', 'major osteoporotic risk', 'hip fracture risk'])
+results_df = pd.DataFrame(columns = np.append(df.columns.values, ['major osteoporotic risk', 'hip fracture risk']))
 
 for index, row in df.iterrows():
 
@@ -48,9 +52,9 @@ for index, row in df.iterrows():
     time.sleep(3)
 
     # Add age, weight, and height into the webform
-    age_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$toolage")
-    weight_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$toolweight")
-    height_input = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$ht")
+    age_input = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_toolage")
+    weight_input = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_toolweight")
+    height_input = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_ht")
 
     age_input.send_keys(row['age'])
     weight_input.send_keys(row['weight'])
@@ -62,8 +66,44 @@ for index, row in df.iterrows():
     else:
         driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_sex2").click()
 
+    if (row['previous fracture']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_previousfracture2").click() 
+
+    if (row['parent fractured hip']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_pfracturehip2").click() 
+    
+    if (row['current smoking']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_currentsmoker2").click() 
+    
+    if (row['glucocorticoids']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_glucocorticoids2").click() 
+
+    if (row['rheumatoid arthritis']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_arthritis2").click() 
+
+    if (row['secondary osteoporosis']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_osteoporosis2").click() 
+
+    if (row['alcohol >3']):
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_alcohol2").click() 
+
+    # NM = No Measurement, or in other words, to leave this part blank
+
+    if (row['femoral neck bmd unit'] != "NM"):
+        select = Select(driver.find_element(By.ID, "dxa"))
+        select.select_by_visible_text(row['femoral neck bmd unit'])
+
+        # Alert appears when clicking "T-Score" specifically, so have to wait and close the alert before proceeding
+        if (row['femoral neck bmd unit'] == "T-Score"):
+                wait = WebDriverWait(driver, timeout=0.5)
+                alert = wait.until(lambda d : d.switch_to.alert)
+                text = alert.text
+                alert.accept()
+
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_bmd_input").send_keys(row['femoral neck bmd value'])
+
     # Click the calculate button
-    driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$btnCalculate").click()
+    driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_btnCalculate").click()
 
     # Wait until the results loaded
     wait = WebDriverWait(driver, 5)
@@ -76,12 +116,12 @@ for index, row in df.iterrows():
     # Add results to a new dataframe
 
     results_df = pd.concat([results_df, 
-        pd.DataFrame([[row['age'],row['weight'],row['height'],row['sex'],major_osteoporotic_risk.text, hip_fracture_risk.text]], 
+        pd.DataFrame([np.append(row, [major_osteoporotic_risk.text, hip_fracture_risk.text])], 
                      columns=results_df.columns)], 
                      ignore_index=True)
 
     # Print results to console to make sure the program is running properly
-    print(major_osteoporotic_risk.text, hip_fracture_risk.text)
+    print(np.append(row, [major_osteoporotic_risk.text, hip_fracture_risk.text]))
 
 # Print the results to the output file
 
