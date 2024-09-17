@@ -43,10 +43,28 @@ driver = webdriver.Chrome(service=service, options=options)
 df = pd.read_csv(args.infile)
 results_df = pd.DataFrame(columns = np.append(df.columns.values, ['major osteoporotic risk', 'hip fracture risk']))
 
+country_df = pd.read_csv('frax_country_ids.csv')
+country_dict = country_df.set_index('country')['id'].to_dict()
+
+optional_parameters = {
+    'previous fracture': "ctl00_ContentPlaceHolder1_previousfracture2",
+    'parent fractured hip': "ctl00_ContentPlaceHolder1_pfracturehip2",
+    'current smoking': "ctl00_ContentPlaceHolder1_currentsmoker2",
+    'glucocorticoids': "ctl00_ContentPlaceHolder1_glucocorticoids2",
+    'rheumatoid arthritis': "ctl00_ContentPlaceHolder1_arthritis2",
+    'secondary osteoporosis': "ctl00_ContentPlaceHolder1_osteoporosis2",
+    'alcohol >3': "ctl00_ContentPlaceHolder1_alcohol2",
+}
+
 for index, row in df.iterrows():
 
     # Reloading the webpage is more consistent than clearing form data
-    driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx')
+    
+    if 'country' in df.columns and row['country'] != "":
+        country_id = country_dict[row['country']]
+        driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx?country='+country_id)
+    else:
+        driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx')
 
     # Must pause for 3 seconds or we will receive an error from the webpage's API of accessing the calculator too fast
     time.sleep(3)
@@ -66,30 +84,13 @@ for index, row in df.iterrows():
     else:
         driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_sex2").click()
 
-    if (row['previous fracture']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_previousfracture2").click() 
-
-    if (row['parent fractured hip']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_pfracturehip2").click() 
-    
-    if (row['current smoking']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_currentsmoker2").click() 
-    
-    if (row['glucocorticoids']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_glucocorticoids2").click() 
-
-    if (row['rheumatoid arthritis']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_arthritis2").click() 
-
-    if (row['secondary osteoporosis']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_osteoporosis2").click() 
-
-    if (row['alcohol >3']):
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_alcohol2").click() 
+    for (key, value) in optional_parameters.items():
+        if (key in df.columns and row[key]):
+            driver.find_element(By.ID, value).click()
 
     # NM = No Measurement, or in other words, to leave this part blank
 
-    if (row['femoral neck bmd unit'] != "NM"):
+    if ('femoral neck bmd unit' in df.columns and row['femoral neck bmd unit'] != "NM"):
         select = Select(driver.find_element(By.ID, "dxa"))
         select.select_by_visible_text(row['femoral neck bmd unit'])
 
