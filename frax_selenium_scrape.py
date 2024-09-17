@@ -42,7 +42,9 @@ driver = webdriver.Chrome(service=service, options=options)
 # Initialize pandas
 
 df = pd.read_csv(args.infile)
-results_df = pd.DataFrame(columns = np.append(df.columns.values, ['major osteoporotic risk', 'hip fracture risk']))
+results_df = pd.DataFrame(columns = np.append(df.columns.values, 
+                                              ['major osteoporotic risk', 'hip fracture risk', 
+                                               'major osteoporotic risk tbs adjusted', 'hip fracture risk tbs adjusted']))
 
 country_df = pd.read_csv('frax_country_ids.csv')
 country_dict = country_df.set_index('country')['id'].to_dict()
@@ -115,6 +117,9 @@ for index, row in df.iterrows():
     major_osteoporotic_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs1").text
     hip_fracture_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs2").text
 
+    major_osteoporotic_risk_tbs_adjusted = 0
+    hip_fracture_risk_tbs_adjusted = 0
+
     if ('tbs unit' in df.columns and
         'femoral neck bmd unit' in df.columns and
         row['femoral neck bmd unit'] != "NM" and
@@ -136,8 +141,8 @@ for index, row in df.iterrows():
 
         driver.find_element(By.ID, "ContentPlaceHolder1_btnCalculate").click()
         
-        major_osteoporotic_risk = driver.find_element(By.ID, "ContentPlaceHolder1_lblr1").text
-        hip_fracture_risk = driver.find_element(By.ID, "ContentPlaceHolder1_lblr2").text
+        major_osteoporotic_risk_tbs_adjusted = driver.find_element(By.ID, "ContentPlaceHolder1_lblr1").text
+        hip_fracture_risk_tbs_adjusted = driver.find_element(By.ID, "ContentPlaceHolder1_lblr2").text
 
         driver.close()
         driver.switch_to.window(driver.window_handles[0])
@@ -145,12 +150,12 @@ for index, row in df.iterrows():
     # Add results to a new dataframe
 
     results_df = pd.concat([results_df, 
-        pd.DataFrame([np.append(row, [major_osteoporotic_risk, hip_fracture_risk])], 
+        pd.DataFrame([np.append(row, [major_osteoporotic_risk, hip_fracture_risk, major_osteoporotic_risk_tbs_adjusted, hip_fracture_risk_tbs_adjusted])], 
                      columns=results_df.columns)], 
                      ignore_index=True)
 
     # Print results to console to make sure the program is running properly
-    print(np.append(row, [major_osteoporotic_risk, hip_fracture_risk]))
+    print(np.append(row, [major_osteoporotic_risk, hip_fracture_risk, major_osteoporotic_risk_tbs_adjusted, hip_fracture_risk_tbs_adjusted]))
 
 # Print the results to the output file
 
