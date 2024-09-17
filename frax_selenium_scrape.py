@@ -62,7 +62,7 @@ for index, row in df.iterrows():
     
     if 'country' in df.columns and row['country'] != "":
         country_id = country_dict[row['country']]
-        driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx?country='+country_id)
+        driver.get("https://frax.shef.ac.uk/FRAX/tool.aspx?country="+str(country_id))
     else:
         driver.get('https://frax.shef.ac.uk/FRAX/tool.aspx')
 
