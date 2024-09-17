@@ -4,8 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.alert import Alert
+# from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.alert import Alert
 import pandas as pd
 import numpy as np
 import platform
@@ -108,21 +109,48 @@ for index, row in df.iterrows():
 
     # Wait until the results loaded
     wait = WebDriverWait(driver, 5)
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_lbrs1"))).click()
+    wait.until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_lbrs1")))
 
     # Grab the results for both risk calculators
-    major_osteoporotic_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs1")
-    hip_fracture_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs2")
+    major_osteoporotic_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs1").text
+    hip_fracture_risk = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lbrs2").text
+
+    if ('tbs unit' in df.columns and
+        'femoral neck bmd unit' in df.columns and
+        row['femoral neck bmd unit'] != "NM" and
+        row['tbs unit'] != "NM" and 
+        EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_ltViewTBS"))):
+        driver.find_element(By.XPATH, "//*[contains(text(), 'Adjust with TBS')]").click()
+
+        time.sleep(0.5)
+
+        driver.switch_to.window(driver.window_handles[1])
+
+        wait.until(EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_btnComputeYes")))
+        driver.find_element(By.ID, "ContentPlaceHolder1_btnComputeYes").click()
+
+        wait.until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_rcbDXADevice_Input")))
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_rcbDXADevice_Input").send_keys(row['tbs unit'], Keys.ENTER)
+
+        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_rntbTBSValue").send_keys(row['tbs'])
+
+        driver.find_element(By.ID, "ContentPlaceHolder1_btnCalculate").click()
+        
+        major_osteoporotic_risk = driver.find_element(By.ID, "ContentPlaceHolder1_lblr1").text
+        hip_fracture_risk = driver.find_element(By.ID, "ContentPlaceHolder1_lblr2").text
+
+        driver.close()
+        driver.switch_to.window(driver.window_handles[0])
 
     # Add results to a new dataframe
 
     results_df = pd.concat([results_df, 
-        pd.DataFrame([np.append(row, [major_osteoporotic_risk.text, hip_fracture_risk.text])], 
+        pd.DataFrame([np.append(row, [major_osteoporotic_risk, hip_fracture_risk])], 
                      columns=results_df.columns)], 
                      ignore_index=True)
 
     # Print results to console to make sure the program is running properly
-    print(np.append(row, [major_osteoporotic_risk.text, hip_fracture_risk.text]))
+    print(np.append(row, [major_osteoporotic_risk, hip_fracture_risk]))
 
 # Print the results to the output file
 

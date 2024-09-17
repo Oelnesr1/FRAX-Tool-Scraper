@@ -30,8 +30,8 @@ country_df = pd.read_csv('frax_country_ids.csv')
 
 data = {
     'age': [random.randint(40, 90) for _ in range(args.nrows)],
-    'weight': [str(round(random.uniform(25, 125), 2)) for _ in range(args.nrows)],
-    'height': [str(round(random.uniform(100, 220), 2)) for _ in range(args.nrows)],
+    'weight': [str(round(random.uniform(25, 125), 1)) for _ in range(args.nrows)],
+    'height': [str(round(random.uniform(100, 220), 1)) for _ in range(args.nrows)],
     'sex': [random.choice(['male', 'female']) for _ in range(args.nrows)],
     'previous fracture': [random.choice([0, 1]) for _ in range(args.nrows)],
     'parent fractured hip':[random.choice([0, 1]) for _ in range(args.nrows)],
@@ -43,7 +43,9 @@ data = {
     'femoral neck bmd unit': BMD_units,
     'femoral neck bmd value': [str(round((random.uniform(0, 1) * (BMD_bounds[BMD_units[row]][1] - BMD_bounds[BMD_units[row]][0])) + BMD_bounds[BMD_units[row]][0], 3)) 
                                for row in range(args.nrows)],
-    'country': [random.choice(country_df['country'].to_list()) for _ in range(args.nrows)]
+    'country': [random.choice(country_df['country'].to_list()) for _ in range(args.nrows)],
+    'tbs unit': [random.choice(["GE-Lunar", "Hologic", "NM"]) for _ in range(args.nrows)],
+    'tbs': [str(round(random.uniform(0.5, 2.0), 2)) for _ in range(args.nrows)]
 }
 
 
