@@ -1,0 +1,101 @@
+age,weight,height,sex,previous fracture,parent fractured hip,current smoking,glucocorticoids,rheumatoid arthritis,secondary osteoporosis,alcohol >3,femoral neck bmd unit,femoral neck bmd value,country,major osteoporotic risk,hip fracture risk
+89,38.14,133.56,male,0,1,0,1,1,1,0,DMS/Medilink,0.617,South Africa (Indian),29,27
+82,55.54,113.44,female,1,1,0,0,0,1,1,Norland,0.232,Kazakhstan,82,80
+78,118.97,101.79,female,1,0,0,0,1,1,1,DMS/Medilink,1.239,Egypt,2.2,0.1
+55,35.64,106.99,male,1,0,1,1,0,0,1,DMS/Medilink,0.375,Australia,67,65
+45,102.48,200.73,female,1,1,1,1,0,0,0,Norland,0.737,Costa Rica,20,4.5
+58,44.27,155.44,female,1,0,1,1,0,1,0,Norland,1.62,Ukraine,3.8,0.0
+42,52.58,138.07,male,1,1,0,0,1,0,0,Hologic,1.18,Thailand,4.8,0.0
+80,83.94,167.29,female,1,1,0,1,1,0,0,NM,0.0,Ecuador,37,30
+78,41.5,162.59,female,1,1,1,1,1,0,0,T-Score,1.948,Switzerland,20,5.0
+67,46.1,151.65,male,1,0,0,0,0,0,0,Hologic,1.261,Netherlands,1.9,0.0
+63,25.26,154.75,female,0,1,1,0,1,0,1,Norland,0.759,South Africa (Coloured),6.4,1.7
+77,46.07,100.54,female,0,1,0,0,1,1,0,NM,0.0,Armenia,12,7.4
+67,64.11,105.68,male,1,0,0,0,0,0,1,DMS/Medilink,0.421,Japan,26,16
+84,46.72,122.07,male,1,0,1,0,0,1,0,Hologic,1.274,South Korea,1.1,0.2
+62,47.79,102.28,female,0,1,1,1,1,0,0,DMS/Medilink,1.269,Mexico,7.6,0.0
+59,122.31,169.48,male,1,1,1,1,1,0,1,NM,0.0,Romania,13,3.4
+54,41.97,187.26,male,0,1,1,1,0,0,1,DMS/Medilink,1.038,Costa Rica,5.1,0.3
+59,119.0,144.24,female,0,1,1,0,1,1,1,Mindways QCT,0.032,Argentina,94,94
+45,109.01,213.5,male,1,0,1,0,1,1,0,NM,0.0,Denmark,8.9,1.7
+54,67.08,115.36,male,1,1,0,0,1,0,0,DMS/Medilink,0.397,Philippines,26,19
+58,89.72,173.2,female,1,0,1,1,1,1,0,Hologic,1.08,US (Black),6.9,0.1
+50,56.18,114.55,male,0,0,0,1,0,0,0,Norland,1.729,Qatar,1.6,0.0
+58,55.06,142.22,female,0,1,0,1,0,1,0,DMS/Medilink,0.106,Myanmar,91,90
+84,47.15,214.05,male,0,0,1,1,0,1,0,T-Score,1.686,Lithuania,0.7,0.3
+59,30.26,102.94,male,0,1,0,0,1,1,0,Hologic,0.704,Palestine,7.7,1.0
+48,97.31,173.71,male,1,1,0,0,1,0,0,NM,0.0,Iran,7.5,0.6
+54,111.2,173.25,male,0,1,1,0,0,1,0,T-Score,-2.996,Singapore (Indian),8.1,4.5
+61,111.01,208.95,male,1,0,0,0,0,1,1,T-Score,-3.21,Malta,29,21
+67,29.94,165.53,female,0,0,0,1,1,1,0,GE-Lunar,0.845,Iceland,14,2.9
+54,50.55,106.61,female,0,0,1,0,0,1,1,Norland,1.196,Malaysia - Bumiputera,1.3,0.0
+49,82.44,102.25,male,0,1,0,1,0,1,0,Mindways QCT,0.666,US (Caucasian),6.8,0.2
+44,106.56,108.29,male,1,1,0,0,1,1,1,NM,0.0,Ireland,1.9,0.0
+45,51.57,161.82,female,0,0,0,0,0,0,0,DMS/Medilink,1.114,Finland,1.5,0.0
+58,30.4,171.73,female,1,0,0,0,1,1,0,Mindways QCT,0.643,Turkey,5.9,0.9
+77,84.75,117.98,male,1,1,0,1,1,0,0,DMS/Medilink,0.812,Romania,14,9.5
+68,55.0,112.85,male,0,0,1,0,1,0,0,Norland,1.323,Singapore (Chinese),2.2,0.1
+41,119.08,209.51,male,1,0,1,1,0,0,1,DMS/Medilink,0.274,Zimbabwe,86,86
+53,50.07,174.04,male,0,0,1,1,1,1,1,T-Score,0.11,US (Caucasian),6.2,0.6
+59,70.94,144.7,male,0,0,0,0,0,0,0,NM,0.0,Finland,1.8,0.2
+55,80.0,219.53,female,0,0,1,0,1,1,1,NM,0.0,Slovakia,14,7.1
+60,112.63,134.55,male,0,1,1,1,0,1,0,DMS/Medilink,1.226,Singapore (Chinese),3.7,0.1
+89,64.98,157.98,male,0,0,0,1,0,0,0,DMS/Medilink,0.092,Tunisia,3.5,2.3
+74,93.2,122.49,female,1,0,0,0,1,0,1,GE-Lunar,1.066,Czech Republic,10,1.0
+89,59.97,161.91,female,1,1,0,1,1,1,1,DMS/Medilink,0.98,Tunisia,3.7,2.3
+83,83.43,155.2,male,0,0,1,1,0,0,0,DMS/Medilink,0.993,Armenia,2.1,1.1
+50,110.36,156.26,male,1,1,1,1,0,1,0,NM,0.0,US (Black),6.3,0.5
+72,46.2,219.42,female,0,0,0,0,1,0,0,T-Score,0.928,Colombia,1.3,0.1
+66,67.53,170.77,female,0,0,0,1,1,0,1,DMS/Medilink,0.03,Taiwan,92,92
+72,42.23,142.38,male,0,1,0,1,1,1,1,Hologic,0.859,Sri Lanka,8.8,3.8
+73,92.51,201.42,female,0,1,0,0,0,1,0,T-Score,-0.538,Kazakhstan,10,2.9
+90,124.71,183.17,male,1,1,1,1,1,0,0,NM,0.0,Egypt,13,12
+47,100.72,164.37,male,0,1,0,1,0,1,1,Mindways QCT,0.919,US (Black),3.5,0.0
+72,34.7,133.75,female,0,1,1,0,0,0,0,Hologic,1.351,Argentina,2.0,0.1
+90,60.71,160.84,male,0,0,0,0,0,1,1,GE-Lunar,1.684,Morocco,0.4,0.2
+81,31.2,137.6,male,0,0,0,1,1,1,1,DMS/Medilink,0.487,Brunei,13,9.9
+48,48.82,193.71,male,1,0,1,1,0,0,1,DMS/Medilink,0.414,Hong Kong,52,51
+81,64.83,195.73,female,1,1,0,1,1,0,0,GE-Lunar,0.913,Lebanon,27,18
+89,57.72,150.32,male,0,0,0,0,0,0,1,DMS/Medilink,0.034,Belgium,43,36
+89,86.45,156.88,male,1,1,0,1,1,0,0,T-Score,-0.585,Brunei,9.7,7.4
+63,39.75,142.92,male,1,1,1,0,0,0,1,Norland,0.484,Taiwan,47,37
+74,50.61,217.83,male,1,1,0,0,0,0,1,NM,0.0,Ukraine,18,17
+85,94.11,209.76,male,1,1,1,0,0,0,0,Mindways QCT,0.543,Hungary,21,18
+61,123.34,123.54,male,0,0,1,1,1,0,0,T-Score,-0.819,Armenia,1.6,0.5
+61,76.29,124.48,female,0,0,1,0,0,1,0,GE-Lunar,0.554,Malta,16,11
+90,111.81,110.65,male,0,1,1,0,0,1,1,Mindways QCT,0.345,Italy,22,20
+68,38.88,163.78,female,0,1,1,1,1,0,0,T-Score,-1.283,Greece,18,6.2
+82,32.1,173.57,male,0,1,0,0,1,0,1,Norland,1.31,Japan,3.3,1.4
+74,117.08,165.66,female,0,0,1,0,0,0,0,Norland,1.665,Belgium,1.7,0.0
+48,60.42,145.48,male,1,1,1,0,1,0,0,T-Score,-2.279,Israel,19,9.1
+59,108.58,116.26,male,0,1,0,1,1,1,1,Norland,0.777,US (Asian),10,0.9
+77,61.74,199.02,male,1,0,1,0,1,1,1,Norland,1.037,Romania,2.9,1.2
+81,120.67,174.61,female,1,0,1,0,1,0,1,GE-Lunar,1.427,Japan,9.4,0.5
+65,76.2,157.23,female,0,0,1,1,0,1,0,Norland,0.451,Portugal,29,22
+44,45.31,181.02,female,1,1,1,0,0,1,1,T-Score,-0.898,Egypt,7.0,0.7
+77,62.35,192.16,female,0,0,0,1,1,0,1,DMS/Medilink,0.92,South Korea,7.8,1.9
+78,100.91,110.88,female,1,1,0,0,1,1,0,Mindways QCT,0.483,South Africa (White),24,15
+87,121.51,175.5,male,1,1,0,1,1,0,1,Hologic,0.805,US (Asian),26,20
+61,110.7,148.67,male,1,0,1,1,0,1,1,GE-Lunar,0.837,Moldova,15,7.5
+66,72.79,113.92,female,1,1,0,1,1,0,0,Hologic,0.789,Kazakhstan,29,2.1
+65,106.55,136.62,male,0,1,1,0,1,0,0,Hologic,1.574,Poland,1.4,0.0
+56,114.44,150.48,female,0,0,1,1,0,0,0,Norland,0.873,Kuwait,3.7,0.5
+74,114.17,194.47,male,0,0,0,0,0,0,1,Norland,1.264,Taiwan,3.0,0.3
+73,50.76,133.52,male,1,1,0,0,1,1,1,Mindways QCT,0.958,Malta,9.6,2.1
+54,54.37,125.26,male,0,1,1,1,0,0,0,Hologic,0.176,New Zealand,85,84
+82,49.74,123.21,male,1,1,1,0,0,0,1,Hologic,1.015,Palestine,4.7,3.1
+51,87.09,170.83,male,1,0,0,0,1,1,1,Mindways QCT,0.755,Taiwan,5.8,0.5
+59,76.9,218.95,female,0,0,0,1,1,1,1,Norland,1.621,Taiwan,4.1,0.0
+73,70.79,177.77,male,1,1,1,0,0,0,0,Norland,1.715,Switzerland,4.2,0.1
+51,93.19,209.97,male,0,1,1,0,1,0,0,GE-Lunar,0.243,Pakistan,76,76
+85,93.3,184.63,female,1,1,0,0,0,0,0,Hologic,0.216,US (Hispanic)           ,82,78
+52,49.39,150.24,male,1,0,0,1,1,0,0,T-Score,-2.869,US (Caucasian),33,18
+57,120.08,121.94,male,0,0,1,1,0,0,0,Norland,1.408,Brazil,0.6,0.0
+54,68.38,159.6,female,0,1,0,0,1,1,0,DMS/Medilink,1.258,Malta,5.8,0.0
+67,60.46,208.45,female,1,1,1,1,0,1,1,NM,0.0,Lebanon,61,55
+42,124.66,137.73,female,0,0,1,0,0,1,0,Norland,0.301,Italy,52,51
+86,118.3,184.05,male,1,0,1,1,1,1,1,Norland,1.367,Georgia,4.1,1.6
+68,88.96,184.64,male,0,0,1,0,1,1,1,DMS/Medilink,0.653,Georgia,10,7.2
+49,106.39,111.51,female,1,0,1,0,1,1,1,GE-Lunar,1.453,Peru,0.7,0.0
+53,95.93,211.83,female,0,0,0,0,0,0,0,NM,0.0,Israel,3.2,0.5
+88,95.85,214.15,female,0,0,0,1,0,1,1,Hologic,1.309,Ecuador,1.1,0.2
