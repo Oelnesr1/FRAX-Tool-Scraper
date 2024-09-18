@@ -1,16 +1,16 @@
 country,age,weight,height,sex,previous fracture,parent fractured hip,current smoking,glucocorticoids,rheumatoid arthritis,secondary osteoporosis,alcohol >3,femoral neck bmd unit,femoral neck bmd value,tbs unit,tbs
+Ethiopia,59,74.6,193.0,female,0,1,0,1,0,0,0,Mindways QCT,0.372,GE-Lunar,1.33
+Ecuador,75,47.0,146.9,female,0,0,1,1,1,0,1,DMS/Medilink,0.0,Hologic,1.524
+Italy,70,84.1,211.0,female,0,0,1,1,1,0,0,NM,0.0,Hologic,0.66
 Botswana,56,117.5,135.7,male,0,0,0,0,0,0,1,Mindways QCT,0.816,NM,0.0
 Singapore (Indian),89,83.8,114.6,male,0,0,1,1,0,0,1,DMS/Medilink,0.357,NM,0.0
-Italy,70,84.1,211.0,female,0,0,1,1,1,0,0,NM,0.0,Hologic,0.66
 Poland,47,120.2,142.9,female,1,0,0,1,1,1,1,T-Score,-1.116,NM,0.0
-Ethiopia,59,74.6,193.0,female,0,1,0,1,0,0,0,Mindways QCT,0.372,GE-Lunar,1.33
 Italy,80,115.8,213.5,female,1,1,0,1,0,0,1,Mindways QCT,0.911,GE-Lunar,1.227
 Malaysia - Bumiputera,82,61.0,155.3,female,0,0,1,1,1,0,0,DMS/Medilink,1.06,GE-Lunar,1.091
 Lithuania,65,106.7,118.2,male,0,1,0,1,1,0,0,Norland,1.617,Hologic,0.834
 Brazil,41,53.2,164.1,male,0,0,1,1,0,0,1,GE-Lunar,1.149,GE-Lunar,1.277
 Philippines,45,53.0,207.3,female,0,0,0,0,0,0,0,GE-Lunar,1.695,GE-Lunar,0.566
 Iran,43,71.4,208.1,male,0,0,0,0,1,1,0,DMS/Medilink,0.044,NM,0.0
-Ecuador,75,47.0,146.9,female,0,0,1,1,1,0,1,DMS/Medilink,0.0,Hologic,1.524
 Kazakhstan,42,25.5,122.0,female,1,0,1,1,0,0,1,DMS/Medilink,0.14,GE-Lunar,0.857
 Uzbekistan,81,123.7,107.1,male,0,1,0,1,0,1,1,T-Score,-0.895,GE-Lunar,1.481
 Uzbekistan,51,77.7,179.4,male,0,1,1,1,1,0,0,Norland,1.014,Hologic,0.679
