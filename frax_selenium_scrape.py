@@ -59,6 +59,8 @@ optional_parameters = {
     'alcohol >3': "ctl00_ContentPlaceHolder1_alcohol2",
 }
 
+wait = WebDriverWait(driver, 5)
+
 for index, row in df.iterrows():
 
     # Reloading the webpage is more consistent than clearing form data
@@ -99,18 +101,16 @@ for index, row in df.iterrows():
 
         # Alert appears when clicking "T-Score" specifically, so have to wait and close the alert before proceeding
         if (row['femoral neck bmd unit'] == "T-Score"):
-                wait = WebDriverWait(driver, timeout=0.5)
-                alert = wait.until(lambda d : d.switch_to.alert)
+                alert = WebDriverWait(driver, timeout=0.5).until(lambda d : d.switch_to.alert)
                 text = alert.text
                 alert.accept()
 
         driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_bmd_input").send_keys(row['femoral neck bmd value'])
 
     # Click the calculate button
-    driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_btnCalculate").click()
+    wait.until(EC.element_to_be_clickable((By.ID,"ctl00_ContentPlaceHolder1_btnCalculate"))).click()
 
     # Wait until the results loaded
-    wait = WebDriverWait(driver, 5)
     wait.until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_lbrs1")))
 
     # Grab the results for both risk calculators
@@ -127,20 +127,16 @@ for index, row in df.iterrows():
         EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_ltViewTBS"))):
         driver.find_element(By.XPATH, "//*[contains(text(), 'Adjust with TBS')]").click()
 
-        time.sleep(0.5)
-
         driver.switch_to.window(driver.window_handles[1])
 
-        wait.until(EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_btnComputeYes")))
-        driver.find_element(By.ID, "ContentPlaceHolder1_btnComputeYes").click()
+        wait.until(EC.element_to_be_clickable((By.ID, "ContentPlaceHolder1_btnComputeYes"))).click()
 
-        wait.until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_rcbDXADevice_Input")))
-        driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_rcbDXADevice_Input").send_keys(row['tbs unit'], Keys.ENTER)
+        wait.until(EC.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_rcbDXADevice_Input"))).send_keys(row['tbs unit'][0], Keys.ENTER)
 
         driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_rntbTBSValue").send_keys(row['tbs'])
 
-        driver.find_element(By.ID, "ContentPlaceHolder1_btnCalculate").click()
-        
+        wait.until(EC.element_to_be_clickable((By.ID, "ContentPlaceHolder1_btnCalculate"))).click()
+
         major_osteoporotic_risk_tbs_adjusted = driver.find_element(By.ID, "ContentPlaceHolder1_lblr1").text
         hip_fracture_risk_tbs_adjusted = driver.find_element(By.ID, "ContentPlaceHolder1_lblr2").text
 
